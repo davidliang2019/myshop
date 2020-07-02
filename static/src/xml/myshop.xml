@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="myshop.categories">
+        <!-- <t t-log="widget"/> -->
+        <t t-foreach="widget.categories" t-as="category">
+            <a href="#" class="w3-bar-item w3-button" t-esc="category.name" t-att="['data-index',category_index]"/>
+        </t>
+    </t>
+    <t t-name="myshop.products">
+        <!-- Image header -->
+        <div t-if="widget.category.image" class="w3-display-container w3-container w3-margin-bottom">
+            <img t-att-src="widget._decodeImage(widget.category.image)" style="width:100%"/>
+            <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+                <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
+                <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
+                <h1 class="w3-hide-small">COLLECTION 2016</h1>
+                <p>
+                    <a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Product grid -->
+        <div class="w3-row">
+            <t t-foreach="widget.category.products" t-as="product">
+                <div class="w3-col l3 s6">
+                    <div class="w3-container o_myshop_image" t-att="['data-index',product_index]">
+                        <img t-att-src="widget._decodeImage(product.image_1920)" style="width:100%"/>
+                        <p>
+                            <span t-esc="product.name"/>
+                            <br/>
+                            <i class="fa fa-dollar" style="font-size:15px"/>
+                            <t t-esc="product.list_price"/>
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </div>
+
+    </t>
+    <t t-name="myshop.product">
+        <!-- <t t-log="widget"/> -->
+        <div class="row">
+            <div class="col-md-6 col-xl-8">
+                <div class="w3-display-container w3-container">
+                    <img t-att-src="decodeImage(widget.image_1920)" class="img img-fluid product_detail_img mh-100"/>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="w3-display-container w3-container">
+                    <h3 t-esc="widget.name"/>
+                    <i class="fa fa-dollar" style="font-size:15px"/>
+                    <strong>
+                        <t t-esc="widget.list_price"/>
+                    </strong>
+                    <br />
+                    <button class="btn btn-primary btn-lg mt16 js_check_product a-submit d-block d-sm-inline-block" t-att="['data-index',index]">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="myshop.progressBar">
+        <div class="row">
+            <div class="col-xl">
+                <div class="wizard">
+                    <div class="progress-wizard">
+                        <a class="no-decoration" href="/shop/cart">
+                          <div id="wizard-step10" class="progress-wizard-step active">
+                            <div class="progress-wizard-bar d-none d-md-block"></div>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Review Order</div>
+                          </div>
+                        </a>
+                        <a class="no-decoration" href="#">
+                          <div id="wizard-step20" class="progress-wizard-step disabled">
+                            <div class="progress-wizard-bar d-none d-md-block"></div>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Address</div>
+                          </div>
+                        </a>
+                        <a class="no-decoration" href="#">
+                          <div id="wizard-step40" class="progress-wizard-step disabled">
+                            <div class="progress-wizard-bar d-none d-md-block"></div>
+                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                            <div class="text-center progress-wizard-steplabel">Confirm Order</div>
+                          </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="myshop.cart">
+        <t t-call="myshop.progressBar"/>
+        <table class="mb16 table table-striped table-sm js_cart_lines" id="cart_products">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="widget" t-as="item">
+                    <t t-log="item"/>
+                    <td>
+                        <img t-att-src="decodeImage(item.product.image_1920)" style="width:40px"/>
+                    </td>
+                    <td t-esc="item.product.name"/>
+                    <td>
+                        <i class="fa fa-minus"/>
+                        <input t-att-value="item.quanlity" size="1"/>
+                        <i class="fa fa-plus"/>
+                    </td>
+                    <td>
+                        <i class="fa fa-dollar" style="font-size:15px"/>
+                        <t t-esc="item.product.list_price"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+</templates>
