@@ -1,6 +1,0 @@
-<odoo>
-  <record model="product.public.category" id="category_my_product">
-    <field name="name">My Product</field>
-    <field name="parent_id"/>
-  </record>
-</odoo>
